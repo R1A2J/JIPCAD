@@ -68,27 +68,21 @@ void CInteractiveCamera::UpdateCamera()
                                         CameraInstance.para[3],
                                         CameraInstance.para[4],
                                         CameraInstance.para[5]);
-
-            
-
+            left = CameraInstance.para[0];
+            right = CameraInstance.para[1];
+            bottom = CameraInstance.para[2]; 
+            top = CameraInstance.para[3]; 
+            nearplane = CameraInstance.para[4]; 
+            farplane = CameraInstance.para[5];  
             type = Orthogonal;
         } else if (CameraInstance.type == "PERSPECTIVE") {
-            if (CameraInstance.para[0] == (float)0.5 && 
-                CameraInstance.para[1] == (float)-0.5 &&
-                CameraInstance.para[2] == (float)-0.5 &&
-                CameraInstance.para[3] == (float)0.5 &&
-                CameraInstance.para[4] == (float)0.1 &&
-                CameraInstance.para[5] == (float)1000) {
-                Camera->lens()->setPerspectiveProjection(45.0f, 1280.f / 720.f, 0.1f, 1000.0f);
-            } else {
-                float aspect_ratio = (float)(CameraInstance.para[1] - CameraInstance.para[0])/(float)(CameraInstance.para[3] - CameraInstance.para[2]);
-                float fov = (float)(std::atan(CameraInstance.para[3]/CameraInstance.para[4]) * 2); 
-                Camera->lens()->setPerspectiveProjection(fov, 
-                                                            aspect_ratio,
-                                                            CameraInstance.para[4],
-                                                            CameraInstance.para[5]);
-
-            }
+            float aspect_ratio = (float)(CameraInstance.para[3] - CameraInstance.para[2])/(float)(CameraInstance.para[1] - CameraInstance.para[0]);
+            float fov = (float)(std::atan(CameraInstance.para[3]/CameraInstance.para[4]) * 2); 
+            std::cout << aspect_ratio << std::endl;
+            Camera->lens()->setPerspectiveProjection(45.0f, 
+                                                        (1280.f / 720.f)* aspect_ratio,
+                                                        CameraInstance.para[4],
+                                                        CameraInstance.para[5]);
             type = Perspective;
         }
         else {
@@ -97,4 +91,33 @@ void CInteractiveCamera::UpdateCamera()
         }
     }
 }
+
+std::string CInteractiveCamera::GetCameraType() {
+    auto* entity = SceneTreeNode->GetInstanceEntity();
+    if (!entity)
+    {
+        entity = SceneTreeNode->GetOwner()->GetEntity();
+    }
+    if (entity)
+    {
+        auto CameraInstance = dynamic_cast<Scene::CCamera*>(entity)->GetCamera();
+        return CameraInstance.type; 
+    }
+    return NULL; 
 }
+void CInteractiveCamera::CameraScroll(float objectz) {
+    if (left + objectz > right - objectz) return; 
+    if (bottom + objectz > top - objectz) return;
+    left += objectz;
+    right -= objectz;
+    bottom += objectz; 
+    top -= objectz; 
+    this->Camera->lens()->setOrthographicProjection(left,
+                            right,
+                            bottom,
+                            top,
+                            nearplane,
+                            farplane);
+}
+}
+

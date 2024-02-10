@@ -45,7 +45,7 @@ CNome3DView::CNome3DView()
     // Setup camera
     zPos = 2.73;
     mainCamera = this->camera();
-    mainCamera->lens()->setPerspectiveProjection(45.0f, 1280.f / 720.f, 0.1f, 1000.0f);
+    //mainCamera->lens()->setPerspectiveProjection(45.0f, 1280.f / 720.f, 0.1f, 1000.0f);
     mainCamera->setPosition(QVector3D(0, 0, zPos));
     mainCamera->setViewCenter(QVector3D(0, 0, 0));
 
@@ -1249,12 +1249,20 @@ void CNome3DView::wheelEvent(QWheelEvent* ev)
         }
         if (objectZ > 30)
             objectZ = 30;
+        /* Added by Brian, 11/24/2023, Wheelevent should adjust left, right, bottom, top cutoff fields in order to zoom in with Parallel Projection */ 
+        if (InteractiveCameras.size() >= 1) {
+            CInteractiveCamera* camera = *(InteractiveCameras.begin()); 
+            if (camera->GetCameraType() == "PARALLEL") {
+                camera->CameraScroll(numDegrees.y()*0.15);
+                return; 
+            }
+        }
         /* Added by Brian, 06/15/2023, wheelEvent axis should be translated via camera's transformation matrix. */
         QMatrix4x4 qtf{this->camerarotation.ToMatrix4().Data()};
         QVector4D trans = qtf * QVector4D(objectX, objectY, objectZ, 0);
         QVector3D objectinput = trans.toVector3D(); 
         sphereTransform->setTranslation(objectinput);
-        //sphereTransform->setTranslation(QVector3D(objectX, objectY, objectZ));
+        //sphereTransform->setTranslation(QVector3D(objectX, objectY, objectZ)); Old Code (Does not rotate camera)
         ev->accept();
     }
 }

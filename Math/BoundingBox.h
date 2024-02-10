@@ -19,14 +19,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 //
-
+   
 #pragma once
 
 #include "Rect.h"
 #include "Vector3.h"
 
 #ifdef URHO3D_SSE
+#ifdef __ARM_ARCH
+#include "sse2neon.h"
+#else
 #include <xmmintrin.h>
+#endif
 #endif
 
 namespace tc

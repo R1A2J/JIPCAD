@@ -1,0 +1,85 @@
+#
+# SoapyTest.nom
+#
+# CHS 2023/12/1
+
+#### Some Surface colors #############################
+surface M  color  (0.9 0.1 1  ) endsurface   # Magenta
+surface Z  color  (1   0   0.6) endsurface   # Zinnober
+surface R  color  (0.9 0.1 0  ) endsurface   # Red
+surface O  color  (1   0.6 0  ) endsurface   # Orange
+surface Y  color  (0.8 0.8 0  ) endsurface   # Yellow
+surface L  color  (0.5 0.8 0  ) endsurface   # Lime
+surface G  color  (0.1 0.8 0  ) endsurface   # Green
+surface A  color  (0   0.9 0.6) endsurface   # Aqua
+surface C  color  (0   0.8 0.9) endsurface   # Cyan
+surface U  color  (0   0.6 1  ) endsurface   # Uniform
+surface B  color  (0   0.3 1  ) endsurface   # Blue
+surface V  color  (0.5 0.1 1  ) endsurface   # Violet
+surface P  color  (0.7 0   0.9) endsurface   # Purple
+
+surface W  color  (1   1   1  ) endsurface   # White
+surface D  color  (0.2 0.2 0.2) endsurface   # Dark
+surface K  color  (0   0   0  ) endsurface   # blacK
+
+backgroundcolor  (0.7 0.7 0.7)  endbackgroundcolor
+
+
+##################  Coordinate System  #######################
+
+point co (0 0 0 ) endpoint
+point cx (1 0 0 ) endpoint
+point cy (0 1 0 ) endpoint
+point cz (0 0 1 ) endpoint
+
+polyline xax ( co cx ) endpolyline
+instance ix  xax  surface R  endinstance
+
+polyline yax ( co cy ) endpolyline
+instance iy  yax  surface B  endinstance
+
+polyline zax ( co cz ) endpolyline
+instance iz  zax  surface G  endinstance
+
+
+###########  Adjustable Parameters on Sliders  ##################
+(*
+bank p
+   set radC      0.90     0.1     2     0.1    ## radius of circle
+   set segC     24.00    12      96     4      ## segments in curve
+
+   list ( radC  segC ) 
+endbank
+*)
+##########################  Border Curves  ###########################
+
+circle circ ( 0.5  24 ) endcircle  
+
+instance circG circ  surface G   translate(0  0.25  0)  rotate(0 1 0)( 45)  endinstance
+instance circR circ  surface R   translate(0 -0.25  0)  rotate(0 1 0)(-45)  endinstance
+
+   
+################### First, cleaned-up manual addition  ###################
+   
+mesh TempMesh_first 
+  face new0 ( .circG.v4 .circG.v6 .circR.v6 .circR.v5 ) endface 
+endmesh
+
+instance iTM_first TempMesh_first   surface M  endinstance
+   
+
+####################  A second addition, before clean-up  #####################  
+   
+mesh TempMesh0 face new0 ( .circG.v8 .circR.v7 .circR.v6 .circG.v6 ) endface endmesh
+instance instTempMesh0 TempMesh0 endinstance
+   
+###########################  
+   
+mesh TempMesh0 face new0 ( .circG.v4 .circG.v5 .circG.v16 .circG.v17 ) endface face new1 ( .circG.v22 .circG.v21 .circG.v15 .circR.v10 ) endface face new2 ( .circG.v23 .circG.v22 .circG.v0 .circR.v8 ) endface endmesh
+instance instTempMesh0 TempMesh0 endinstance  
+
+
+################################   end   ############################################
+
+
+

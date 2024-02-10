@@ -1,0 +1,87 @@
+##################  SURFACES   ######################### 
+
+surface M  color  (0.9 0   0.9) endsurface   # Magenta
+surface Z  color  (1   0   0.6) endsurface   # Zinnober
+surface R  color  (1   0.1 0  ) endsurface   # Red
+surface O  color  (1   0.6 0  ) endsurface   # Orange
+surface Y  color  (1   1   0  ) endsurface   # Yellow
+surface L  color  (0.5 1   0  ) endsurface   # Lime
+surface G  color  (0   0.9 0  ) endsurface   # Green
+surface A  color  (0   0.9 0.7) endsurface   # Aqua
+surface C  color  (0   1   1  ) endsurface   # Cyan
+surface U  color  (0   0.6 1  ) endsurface   # Uniform
+surface B  color  (0   0.3 1  ) endsurface   # Blue
+surface V  color  (0.5 0   0.9) endsurface   # Violet
+surface P  color  (0.7 0   0.9) endsurface   # Purple
+
+surface W  color  (0.9 0.9 0.9) endsurface   # White
+surface D  color  (0.4 0.4 0.4) endsurface   # Dark
+surface K  color  (0   0   0  ) endsurface   # blacK
+
+backgroundcolor (0.8 0.8 0.8) endbackgroundcolor 
+
+################ Coordinate axes  ##################
+
+point ooo  ( 0 0 0 ) endpoint 
+point xoo  ( 1 0 0 ) endpoint
+point oyo  ( 0 1 0 ) endpoint
+point ooz  ( 0 0 1 ) endpoint
+
+polyline xaxis (ooo xoo) endpolyline
+polyline yaxis (ooo oyo) endpolyline
+polyline zaxis (ooo ooz) endpolyline
+
+group coord_axes
+  instance ix xaxis surface R endinstance
+  instance iy yaxis surface U endinstance
+  instance iz zaxis surface G endinstance
+endgroup
+
+bank p            # init    min     max    step 
+    set radXsect    0.04    0.01    1      0.01    #  radius cross-sect
+    set scale     0.5       0.01     3      0.1     #  scale Loop in "side"
+    set rotLoop    0    -180     180      1       #  rotate Loop in "side"  
+    set facelift    1   0       3      0.01    #  dist of face from origin
+
+    list  ( radXsect  sclLoop  rotLoop  facelift )
+endbank
+
+point Yxyz  ( 1  1  1 ) endpoint
+point Yxyc  ( 1  1 -1 ) endpoint
+point Yayz  (-1  1  1 ) endpoint
+point Yayc  (-1  1 -1 ) endpoint
+
+mesh tria  
+  face ft (Yxyz Yxyc Yayc Yayz) endface
+endmesh
+
+bspline tpath   order 4
+  ( Yxyz Yxyc Yayc Yayz Yxyz Yxyz)
+  segs 60
+endbspline
+
+circle circ ( {expr $p.radXsect}  20 ) endcircle
+
+sweep tloop
+  crosssection circ  endcrosssection
+  path tpath  mintorsion  azimuth 0  twist 0  endpath
+endsweep
+
+group side 
+    instance itria tria surface O translate(0 0 {expr $p.facelift}) endinstance 
+    instance itloop tloop scale( {expr $p.scale} {expr $p.scale} {expr $p.scale} )
+                          rotate(0 1 0)({expr $p.rotLoop}) 
+                          translate(0 0 {expr $p.facelift}) endinstance
+endgroup
+
+group scene
+    instance icoord coord_axes   scale (1.5 1.5 1.5)    endinstance 
+    instance isa side surface M endinstance
+    instance isb side surface Z rotate (0 0 1) (90) endinstance
+    instance isc side surface R rotate (0 0 1) (180) endinstance
+    instance isd side surface O rotate (0 0 1) (270) endinstance
+    instance ise side surface Y rotate (1 0 0) (90) endinstance
+    instance isf side surface L rotate (1 0 0) (270) endinstance
+endgroup
+
+instance iscene scene  endinstance

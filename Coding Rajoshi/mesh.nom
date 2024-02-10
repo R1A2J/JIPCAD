@@ -1,0 +1,29 @@
+surface G color (0.1 0.8 0) endsurface # Green
+mesh normalleaf
+    point a (0 0 -0.51) endpoint
+    point b (0.027 0 -0.4971) endpoint
+    point c (0.15 0 -0.4) endpoint
+    point d (0.2 0 -0.3) endpoint
+    point e (0.2292 0 -0.1997) endpoint
+    point f (0.245 0 -0.0995) endpoint
+    point g (0.25 0 0) endpoint
+    point h (0.245 0 0.0995) endpoint
+    point i (0.2292 0 0.1997) endpoint
+    point j (0.2 0 0.3) endpoint
+    point k (0.15 0 0.4) endpoint
+    point l (0.027 0 0.4971) endpoint
+    point m (0 0 0.51) endpoint
+    point n (-0.027 0 0.4971) endpoint
+    point o (-0.15 0 0.4) endpoint
+    point p (-0.2 0 0.3) endpoint
+    point q (-0.2292 0 0.1997) endpoint
+    point r (-0.245 0 0.0995) endpoint
+    point s (-0.25 0 0) endpoint
+    point t (-0.245 0 -0.0995) endpoint
+    point u (-0.2292 0 -0.1997) endpoint
+    point v (-0.2 0 -0.3) endpoint
+    point x (-0.15 0 -0.4) endpoint
+    point y (-0.027 0 -0.4971) endpoint
+    face leaf (a b c d e f g h i j k l m n o p q r s t u v x y) endface
+endmesh
+instance rajoshi normalleaf surface G endinstance

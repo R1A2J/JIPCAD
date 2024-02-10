@@ -1,0 +1,40 @@
+#################################################################################
+surface O color (0.9 0.6 0) endsurface # Orange
+surface ZC color (218/255 165/255 32/255) endsurface #Zinc
+surface BR color (139/255 69/255 19/255) endsurface #Brown
+surface Bl  color  (0   0   0) endsurface   # Black
+mesh rectangle
+    point a (4 -0.5 1) endpoint
+    point b (4 0.5 1) endpoint
+    point c (4 -0.5 -1) endpoint
+    point d (4 0.5 -1) endpoint
+    point e (-4 -0.5 1) endpoint
+    point f (-4 0.5 1) endpoint
+    point g (-4 -0.5 -1) endpoint
+    point h (-4 0.5 -1) endpoint
+    face a1 (c d b a) surface ZC endface
+    face a2 (e f h g) surface ZC endface
+    face a3 (a b f e) surface O endface
+    face a4 (g h d c) surface O endface
+    face a5 (a e g c) surface BR endface
+    face a6 (d h f b) surface BR endface
+endmesh
+mesh rectangle1
+    point a (3.5 0.75 1.25) endpoint
+    point b (3.5 -0.75 1.25) endpoint
+    point c (3.5 -0.75 -5) endpoint
+    point d (3.5 0.75 -5) endpoint
+    point e (2 0.75 1.25) endpoint
+    point f (2 -0.75 1.25) endpoint
+    point g (2 -0.75 -5) endpoint
+    point h (2 0.75 -5) endpoint
+    face a1 (a b c d) surface ZC endface
+    face a2 (e f b a) surface O endface
+    face a3 (h g f e) surface ZC endface
+    face a4 (d c g h) surface O endface
+    face a5 (d h e a) surface BR endface
+    face a6 (b f g c) surface BR endface
+endmesh
+instance showcube1 rectangle endinstance
+instance showcube2 rectangle1 endinstance
+instance showcube3 rectangle1 translate (-5.5 0 0) endinstance

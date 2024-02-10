@@ -1,0 +1,46 @@
+#################################################################################
+surface O color (0.9 0.6 0) endsurface # Orange
+surface ZC color (218/255 165/255 32/255) endsurface #Zinc
+surface BR color (139/255 69/255 19/255) endsurface #Brown
+surface Bl  color  (0   0   0) endsurface   # Black
+surface B color (0 0 1) endsurface     # Blue
+surface R color (0.99 0.05 0) endsurface     # Red
+surface G color (0 0.9 0) endsurface   # Green
+point a (0 0 0) endpoint
+point b (0.25 1 0) endpoint
+point c (0 1.9 0) endpoint
+point d (-1 2 0) endpoint
+point e (-2 0 0) endpoint
+point f (-1 -2 0) endpoint
+point g (0 -1.9 0) endpoint
+point h (0.25 -1 0) endpoint
+point i (0.15 -0.5 0) endpoint
+point q (0.05 -0.25 0) endpoint
+point r (0.0001 -0.001 0) endpoint
+point j (-0.25 1 0) endpoint
+point k (0 1.9 0) endpoint
+point l (1 2 0) endpoint
+point m (2 0 0) endpoint
+point n (1 -2 0) endpoint
+point o (0 -1.9 0) endpoint
+point p (-0.25 -1 0) endpoint
+bspline cell order 3 (a b c d e f g h i q r a j k l m n o p a b) segs 100 endbspline
+circle ca (0.1 100) endcircle
+sweep cross
+    crosssection ca endcrosssection
+    path cell endpath
+endsweep
+gencartesiansurf example0 func [sqrt(y)] (1.4 1.6 0 0.636 10 10) endgencartesiansurf
+point ba (0.74 1.29 0) endpoint
+point abc (2.08 2.163 0) endpoint
+point bc (0.78 0.304 0) endpoint
+mesh ab
+    face ab (a ba abc bc) surface G endface
+endmesh
+instance s1 ab scale (0.5 0.5 0.5) rotate (0 0 1) (270) translate (0 -1.9 0) surface G endinstance
+instance s0 example0 translate (-1.5 0 1.7) rotate (1 0 0) (90) surface BR endinstance
+instance show1 cell surface O endinstance
+instance show3 cross surface R endinstance
+instance show2 cross rotate (1 0 0) (90) surface R endinstance
+instance show4 cross rotate (0 1 0) (90) surface R endinstance
+#take a look at ‘bank’ and then you can add sliders to it

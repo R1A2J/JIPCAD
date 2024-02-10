@@ -1,0 +1,59 @@
+bank bbb
+  set rad 0.025 0.01 1 0.005
+  set segs 60 50 70 1 
+  list (rad segs)
+endbank
+surface G color (0.1 0.8 0) endsurface # Green
+surface BR color (139/255 69/255 19/255) endsurface #Brown
+point a (0 0 8) endpoint
+point b (-1.5 0 4) endpoint
+point c (1.5 0 4) endpoint
+point d (-1.5 0 3) endpoint
+point e (1.5 0 3) endpoint
+point f (-3.8 0 0) endpoint
+point g (-1.8 0 2) endpoint
+point h (-3.3 0 1) endpoint
+point i (1.8 0 2) endpoint
+point j (3.3 0 1) endpoint
+point k (3.8 0 0) endpoint
+point l (0 0 -4.5) endpoint
+point m (4 0 -1) endpoint
+point n (3.5 0 -3.25) endpoint
+point o (0.5 0 -4.5) endpoint
+point p (-0.5 0 -4.5) endpoint
+point q (-4 0 -1) endpoint
+point r (-3.5 0 -3.25) endpoint
+bspline id1 order 5 (e c a b d g h f q r p l o n m k j i e c a b) segs 60 endbspline
+circle ac ({expr $bbb.rad} 100) endcircle
+sweep ab
+  crosssection ac endcrosssection
+  path id1 mintorsion endpath
+endsweep
+point ra (0 -4 -1.293) endpoint
+point rb (0 4 -1.293) endpoint
+polyline ice (ra rb) endpolyline
+torus id (0.5 0.1 360 0 360 20 20) endtorus
+point aa (-3.93 0 -1.293) endpoint
+point bb (3.93 0 -1.293) endpoint
+point cc (-3.5112 -1 -1.293) endpoint
+point dd (3.5112 -1 -1.293) endpoint
+point ee (-3.5112 1 -1.293) endpoint
+point ff (3.5112 1 -1.293) endpoint
+point gg (-1.098 -2 -1.293) endpoint
+point hh (1.098 -2 -1.293) endpoint
+point ii (-1.098 2 -1.293) endpoint
+point jj (1.098 2 -1.293) endpoint
+point kk (-0.7878 -3 -1.293) endpoint
+point ll (0.7878 -3 -1.293) endpoint
+point mm (-0.7878 3 -1.293) endpoint
+point nn (0.7878 3 -1.293) endpoint
+bspline ice1 order 7 (ee ii mm rb nn jj ff bb dd hh ll ra kk gg cc aa ee ii mm rb nn jj ff) segs {expr bbb.segs} endbspline
+instance show ab surface G endinstance
+instance show1 ab scale (0.88 0.88 0.88) translate (0 -1 -0.38) surface G endinstance
+instance show2 ab scale (0.88 0.88 0.88) translate (0 1 -0.38) surface G endinstance
+instance show3 ab scale (0.488 0.488 0.488) translate (0 -2 -2.054) surface G endinstance
+instance show4 ab scale (0.488 0.488 0.488) translate (0 2 -2.054) surface G endinstance
+instance show5 ab scale (0.404 0.404 0.404) translate (0 -3 -2) surface G endinstance
+instance show6 ab scale (0.404 0.404 0.404) translate (0 3 -2) surface G endinstance
+instance show8 id rotate (1 0 0) (90) translate (0 0 6.85) surface BR endinstance
+instance show9 ice1 surface G endinstance

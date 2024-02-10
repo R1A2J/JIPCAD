@@ -1,0 +1,9 @@
+surface G color (0.1 0.8 0) endsurface # Green
+bank bb 
+    set exp -2 -5 0 1
+    list (exp)
+endbank
+#gencartesiansurf example0 func [x^{expr bb.exp}] (-2 2 -1 0 40 40) endgencartesiansurf
+#gencartesiansurf example0 func [x + y] (-2 2 -1 0 40 40) endgencartesiansurf
+gencartesiansurf example0 func [x] (-2 0 -1 0 40 40) endgencartesiansurf
+instance s0 example0 surface G endinstance

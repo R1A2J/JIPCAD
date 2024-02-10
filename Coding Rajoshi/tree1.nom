@@ -1,0 +1,16 @@
+surface Br color (139/255 69/255 19/255) endsurface #Brown
+surface G color (0.1 0.8 0) endsurface # Green
+surface O color (0.9 0.6 0) endsurface # Orange
+cylinder a (0.5 10 360 60) endcylinder
+point c (0 0 0) endpoint
+point b (0.7 0 0.644) endpoint
+point e (1.571 0 1) endpoint
+point d (2 0 0.909) endpoint
+beziercurve ff (c b e d) segs 20 endbeziercurve
+circle rad (0.05 60) endcircle
+sweep branh  
+  crosssection rad endcrosssection
+  path ff mintorsion endpath
+endsweep
+genimplicitsurf goursatTangle func [((x**2)/(0.25**2))+((y**2)/(0.5**2))-1] (-3 3 -3 3 -3 3 50 50 50) endgenimplicitsurf
+instance s0 goursatTangle surface R endinstance

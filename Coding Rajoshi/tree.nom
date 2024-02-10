@@ -1,0 +1,102 @@
+surface Br color (139/255 69/255 19/255) endsurface #Brown
+surface G color (0.1 0.8 0) endsurface # Green
+surface O color (0.9 0.6 0) endsurface # Orange
+cylinder a (0.5 10 360 60) endcylinder
+point c (0 0 0) endpoint
+point b (0.7 0 0.644) endpoint
+point e (1.571 0 1) endpoint
+point d (2 0 0.909) endpoint
+beziercurve ff (c b e d) segs 20 endbeziercurve
+circle rad (0.05 60) endcircle
+sweep branh  
+  crosssection rad endcrosssection
+  path ff mintorsion endpath
+endsweep
+mesh normalleaf
+    point a (0 0 -0.51) endpoint
+    point g (0.25 0 0) endpoint
+    point m (0 0 0.51) endpoint
+    point s (-0.25 0 0) endpoint
+    face leaf (a g m s) endface
+endmesh
+group branch
+    instance ar branh scale (2.5 2.5 2.5) translate (1 0 0) surface O endinstance
+    instance rajoshi normalleaf translate (1.2 0 0.7) surface G endinstance
+    instance rajoshi normalleaf rotate (0 0 1) (180) translate (1.2 0.01 0.7) surface G endinstance
+    instance rajoshi normalleaf translate (-1.2 0 0.4) rotate (0 1 0) (180) surface G endinstance
+    instance rajoshi normalleaf rotate (0 0 1) (180) translate (-1.2 0.01 0.4) rotate (0 1 0) (180) surface G endinstance
+    instance rajoshi normalleaf translate (1.5 0 1) surface G endinstance
+    instance rajoshi normalleaf rotate (0 0 1) (180) translate (1.5 0.01 1) surface G endinstance
+    instance rajoshi normalleaf translate (-1.5 0 0.2) rotate (0 1 0) (180) surface G endinstance
+    instance rajoshi normalleaf rotate (0 0 1) (180) translate (-1.5 0.01 0.2) rotate (0 1 0) (180) surface G endinstance
+    instance rajoshi normalleaf translate (1.8 0 1.3) surface G endinstance
+    instance rajoshi normalleaf rotate (0 0 1) (180) translate (1.8 0.01 1.3) surface G endinstance
+    instance rajoshi normalleaf translate (1.8 0 0) surface G endinstance
+    instance rajoshi normalleaf rotate (0 0 1) (180) translate (1.8 0.01 0) surface G endinstance
+    instance rajoshi normalleaf translate (2.1 0 1.4) surface G endinstance
+    instance rajoshi normalleaf rotate (0 0 1) (180) translate (2.1 0.01 1.4) surface G endinstance
+    instance rajoshi normalleaf translate (2.1 0 0.25) surface G endinstance
+    instance rajoshi normalleaf rotate (0 0 1) (180) translate (2.1 0.01 0.25) surface G endinstance
+    instance rajoshi normalleaf translate (2.4 0 1.7) surface G endinstance
+    instance rajoshi normalleaf rotate (0 0 1) (180) translate (2.4 0.01 1.7) surface G endinstance
+    instance rajoshi normalleaf translate (2.4 0 0.5) surface G endinstance
+    instance rajoshi normalleaf rotate (0 0 1) (180) translate (2.4 0.01 0.5) surface G endinstance
+    instance rajoshi normalleaf translate (2.7 0 1.9) surface G endinstance
+    instance rajoshi normalleaf rotate (0 0 1) (180) translate (2.7 0.01 1.9) surface G endinstance
+    instance rajoshi normalleaf translate (2.7 0 0.7) surface G endinstance
+    instance rajoshi normalleaf rotate (0 0 1) (180) translate (2.7 0.01 0.7) surface G endinstance
+    instance rajoshi normalleaf translate (3 0 2.1) surface G endinstance
+    instance rajoshi normalleaf rotate (0 0 1) (180) translate (3 0.01 2.1) surface G endinstance
+    instance rajoshi normalleaf translate (3 0 0.9) surface G endinstance
+    instance rajoshi normalleaf rotate (0 0 1) (180) translate (3 0.01 0.9) surface G endinstance
+    instance rajoshi normalleaf translate (3.3 0 2.25) surface G endinstance
+    instance rajoshi normalleaf rotate (0 0 1) (180) translate (3.3 0.01 2.25) surface G endinstance
+    instance rajoshi normalleaf translate (3.3 0 1) surface G endinstance
+    instance rajoshi normalleaf rotate (0 0 1) (180) translate (3.3 0.01 1) surface G endinstance
+    instance rajoshi normalleaf translate (3.6 0 2.4) surface G endinstance
+    instance rajoshi normalleaf rotate (0 0 1) (180) translate (3.6 0.01 2.4) surface G endinstance
+    instance rajoshi normalleaf translate (3.6 0 1.15) surface G endinstance
+    instance rajoshi normalleaf rotate (0 0 1) (180) translate (3.6 0.01 1.15) surface G endinstance
+    instance rajoshi normalleaf translate (3.9 0 2.5) surface G endinstance
+    instance rajoshi normalleaf rotate (0 0 1) (180) translate (3.9 0.01 2.5) surface G endinstance
+    instance rajoshi normalleaf translate (3.9 0 1.3) surface G endinstance
+    instance rajoshi normalleaf rotate (0 0 1) (180) translate (3.9 0.01 1.3) surface G endinstance
+    instance rajoshi normalleaf translate (4.2 0 2.6) surface G endinstance
+    instance rajoshi normalleaf rotate (0 0 1) (180) translate (4.2 0.01 2.6) surface G endinstance
+    instance rajoshi normalleaf translate (4.2 0 1.4) surface G endinstance
+    instance rajoshi normalleaf rotate (0 0 1) (180) translate (4.2 0.01 1.4) surface G endinstance
+    instance rajoshi normalleaf translate (4.5 0 2.7) surface G endinstance
+    instance rajoshi normalleaf rotate (0 0 1) (180) translate (4.5 0.01 2.7) surface G endinstance
+    instance rajoshi normalleaf translate (4.5 0 1.5) surface G endinstance
+    instance rajoshi normalleaf rotate (0 0 1) (180) translate (4.5 0.01 1.5) surface G endinstance
+    instance rajoshi normalleaf translate (4.8 0 2.8) surface G endinstance
+    instance rajoshi normalleaf rotate (0 0 1) (180) translate (4.8 0.01 2.8) surface G endinstance
+    instance rajoshi normalleaf translate (4.8 0 1.6) surface G endinstance
+    instance rajoshi normalleaf rotate (0 0 1) (180) translate (4.8 0.01 1.6) surface G endinstance
+    instance rajoshi normalleaf translate (5.1 0 2.85) surface G endinstance
+    instance rajoshi normalleaf rotate (0 0 1) (180) translate (5.1 0.01 2.85) surface G endinstance
+    instance rajoshi normalleaf translate (5.1 0 1.65) surface G endinstance
+    instance rajoshi normalleaf rotate (0 0 1) (180) translate (5.1 0.01 1.65) surface G endinstance
+    instance rajoshi normalleaf translate (5.4 0 2.9) surface G endinstance
+    instance rajoshi normalleaf rotate (0 0 1) (180) translate (5.4 0.01 2.9) surface G endinstance
+    instance rajoshi normalleaf translate (5.4 0 1.7) surface G endinstance
+    instance rajoshi normalleaf rotate (0 0 1) (180) translate (5.4 0.01 1.7) surface G endinstance
+    instance rajoshi normalleaf translate (5.7 0 2.9) surface G endinstance
+    instance rajoshi normalleaf rotate (0 0 1) (180) translate (5.7 0.01 2.9) surface G endinstance
+    instance rajoshi normalleaf translate (5.7 0 1.68) surface G endinstance
+    instance rajoshi normalleaf rotate (0 0 1) (180) translate (5.7 0.01 1.68) surface G endinstance
+    instance rajoshi1 normalleaf rotate (0 0 1) (270) rotate (0 1 0) (45) translate (6.35 0 2.6) surface G endinstance
+endgroup
+point leaf1 (0.25 0 0) endpoint
+point leaf2 (0.245 )
+beziercurve leafline ()
+instance ab a surface Br endinstance
+instance af branh rotate (0 0 1) (270) scale (2.5 2.5 2.5) translate (0 0 10) surface O endinstance
+instance brn branch translate (-1 0 10) endinstance
+instance brn1 branch rotate (0 0 1) (180) translate (1 0 10) endinstance
+instance rajoshi4 branch rotate (0 0 1) (90) translate (0 -1 10) endinstance
+instance rajoshi5 branch rotate (0 0 1) (270) translate (0 1 10) endinstance
+instance rajoshi6 branch rotate (0 0 1) (45) translate (-0.75 -0.75 10) endinstance
+instance rajoshi7 branch rotate (0 0 1) (135) translate (0.75 -0.75 10) endinstance
+instance rajoshi8 branch rotate (0 0 1) (225) translate (0.75 0.75 10) endinstance
+instance rajoshi9 branch rotate (0 0 1) (315) translate (-0.75 0.75 10) endinstance

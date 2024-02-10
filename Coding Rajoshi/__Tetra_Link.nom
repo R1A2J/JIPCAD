@@ -1,0 +1,102 @@
+#
+### Tetra_Link.nom
+#
+#  A minimal interlinking of four triangular loops.
+#
+### CHS 2023/11/17
+
+##################  SURFACES   ######################### 
+
+surface M  color  (0.9 0   0.9) endsurface   # Magenta
+surface Z  color  (1   0   0.6) endsurface   # Zinnober
+surface R  color  (1   0.1 0  ) endsurface   # Red
+surface O  color  (1   0.6 0  ) endsurface   # Orange
+surface Y  color  (1   1   0  ) endsurface   # Yellow
+surface L  color  (0.5 1   0  ) endsurface   # Lime
+surface G  color  (0   0.9 0  ) endsurface   # Green
+surface A  color  (0   0.9 0.7) endsurface   # Aqua
+surface C  color  (0   1   1  ) endsurface   # Cyan
+surface U  color  (0   0.6 1  ) endsurface   # Uniform
+surface B  color  (0   0.3 1  ) endsurface   # Blue
+surface V  color  (0.5 0   0.9) endsurface   # Violet
+surface P  color  (0.7 0   0.9) endsurface   # Purple
+
+surface W  color  (0.9 0.9 0.9) endsurface   # White
+surface D  color  (0.4 0.4 0.4) endsurface   # Dark
+surface K  color  (0   0   0  ) endsurface   # blacK
+
+backgroundcolor (0.8 0.8 0.8) endbackgroundcolor 
+
+################ Coordinate axes  ##################
+
+point ooo  ( 0 0 0 ) endpoint 
+point xoo  ( 1 0 0 ) endpoint
+point oyo  ( 0 1 0 ) endpoint
+point ooz  ( 0 0 1 ) endpoint
+
+polyline xaxis (ooo xoo) endpolyline
+polyline yaxis (ooo oyo) endpolyline
+polyline zaxis (ooo ooz) endpolyline
+
+group coord_axes
+  instance ix xaxis surface R endinstance
+  instance iy yaxis surface U endinstance
+  instance iz zaxis surface G endinstance
+endgroup
+
+
+#################################################################
+
+bank p            # init    min     max    step 
+    set radXsect    0.04    0.01    1      0.01    #  radius cross-sect
+    set sclLoop     1.2     1       3      0.1     #  scale Loop in "side"
+    set rotLoop    27    -180     180      1       #  rotate Loop in "side"  
+    set facelift    0.355   0       3      0.01    #  dist of face from origin
+
+    list  ( radXsect  sclLoop  rotLoop  facelift )
+endbank
+
+
+###########################  Big triangular loop sweep path  ####################################
+
+point ta  ( 1    0      0 ) endpoint 
+point tb  (-0.5  0.866  0 ) endpoint 
+point tc  (-0.5 -0.866  0 ) endpoint 
+
+mesh tria  
+  face ft (ta tb tc ) endface
+endmesh
+
+bspline tpath   order 2
+  ( ta tb tc ta tb )
+  segs 60
+endbspline
+
+circle circ ( {expr $p.radXsect}  20 ) endcircle
+
+sweep tloop
+  crosssection circ  endcrosssection
+  path tpath  mintorsion  azimuth 0  twist 0  endpath
+endsweep
+
+
+#################  ASSEMBLY & RENDER  ###################################################
+
+group side
+  instance itria  tria   surface O  translate(0 0 {expr $p.facelift} )    endinstance   
+  instance itloop tloop  scale( {expr $p.sclLoop} {expr $p.sclLoop} {expr $p.sclLoop} )
+                         rotate(0 0 1)({expr $p.rotLoop}) 
+                         translate(0 0 {expr $p.facelift +1.2*$p.radXsect} )  endinstance  
+endgroup
+
+group scene
+  instance icoord coord_axes   scale (1.5 1.5 1.5)    endinstance 
+  instance isa side  surface M  rotate(1 0 0)( 180 )    endinstance
+  instance isb side  surface V  rotate(0 1 0)( -70.53 )   endinstance
+  instance isc side  surface U  rotate(0 1 0)( -70.53 )  rotate(0 0 1)(120)  endinstance
+  instance isd side  surface G  rotate(0 1 0)( -70.53 )  rotate(0 0 1)(240)  endinstance
+endgroup
+
+instance iscene scene  endinstance
+
+######################   END   ##########################################################  

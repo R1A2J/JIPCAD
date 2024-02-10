@@ -1,0 +1,25 @@
+#################################################################################
+
+surface O color (0.9 0.6 0) endsurface # Orange
+surface B color (0 0 1) endsurface     # Blue
+surface Bl  color  (0   0   0) endsurface   # Black
+surface W color  (1 1 1) endsurface   # White
+surface U color (0 0.5 1) endsurface   # Uniform
+surface R color (1 0 0) endsurface     # Red
+
+###################################################
+sphere face (1 180 0 360 10 10) endsphere
+cylinder body (1 1 360 10) endcylinder
+funnel bottom (1 1.5 1 10) endfunnel
+circle eye (1 50) endcircle
+point a (0 0 4) endpoint
+point b (-1 1 4) endpoint
+point c (1 1 4) endpoint
+polyline ply1 (b a c) endpolyline
+instance showcyl body scale (2 2 2) surface W endinstance
+instance showface face translate (0 0 3) surface W endinstance
+instance shotbottom bottom scale (1 1 3) translate (0 0 -3) surface W endinstance
+instance smile ply1 scale (0.5 0.5 0.5) rotate (2 0 0) (90) translate (0 2.87 2.3) surface Bl endinstance
+instance nose ply1 scale (0.25 0.5 1) rotate (1 0 0) (180) translate (0 1.47 7) surface O endinstance
+instance showeye1 eye scale (0.125 0.125 1) rotate (1 0 0) (90) translate (-0.25 0.88 3.5) surface Bl endinstance 
+instance showeye1 eye scale (0.125 0.125 1) rotate (1 0 0) (90) translate (0.25 0.88 3.5) surface Bl endinstance 
